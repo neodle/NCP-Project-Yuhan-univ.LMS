@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메인 페이지</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      display: flex;
+      flex-direction: column;
+      background-color: #f0f0f0;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .logo img {
+      height: 70px;
+      cursor: pointer;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .main-body {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #117a8b;
+      color: white;
+      height: 100vh;
+      padding: 20px 15px;
+      box-sizing: border-box;
+    }
+
+    .sidebar img {
+      width: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #0f5e71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      padding: 8px 0;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #0d5060;
+      padding-left: 5px;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px 40px;
+    }
+
+    .term-select {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 40px;
+      font-weight: bold;
+    }
+
+    .dropdown-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fff;
+      font-size: 14px;
+      color: #333;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid black;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      width: 350px;
+      background-color: #2d4a5a;
+      color: white;
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: transform 0.2s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card.light {
+      background-color: #4e8a94;
+    }
+
+    .card-header {
+      font-size: 15px;
+      font-weight: bold;
+      padding: 15px;
+    }
+
+    .card-footer {
+      font-size: 12px;
+      background-color: white;
+      color: #444;
+      padding: 10px 15px;
+      border-top: 1px solid #ddd;
+    }
+
+    .card-footer div {
+      margin-bottom: 4px;
+    }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .type-btn {
+      font-size: 11px;
+      padding: 3px 8px;
+      background-color: #2d4a5a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .card.light .type-btn {
+      background-color: #4e8a94;
+    }
+
+    .bell-icon {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고"></a>
+    </div>
+    <div class="header-right"></div>
+  </div>
+
+  <div class="main-body">
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="calendar.html">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="dropdown-wrapper">
+        <select>
+          <option>2023년</option>
+          <option>2024년</option>
+          <option selected>2025년</option>
+          <option>2026년</option>
+        </select>
+        <select>
+          <option selected>1학기</option>
+          <option>여름학기</option>
+          <option>2학기</option>
+          <option>겨울학기</option>
+          <option>연단위운영</option>
+          <option>구분없음</option>
+        </select>
+      </div>
+
+      <div class="term-select">강의 리스트</div>
+
+      <!-- 카드 섹션들은 생략 없이>
+      !-- 강의 카드 영역 등 기존 콘텐츠 삽입 >
+
+      !-- 비학위과정 -->
+      <div class="section">
+        <h2>비학위과정</h2>
+  <div class="card-grid">
+    <!-- ✅ 소방안전교육 카드: FSlecture.html로 이동 -->
+    <div class="card clickable" onclick="location.href='FSlecture.html'">
+      <div class="card-header">2025-1학기 소방안전교육</div>
+      <div class="card-footer">
+        <div>- 교수명: 기숙사</div>
+        <div>- 구분: 없음</div>
+        <div>- 학과명: 정보없음</div>
+        <div class="card-bottom">
+          <button class="type-btn">사이버강의</button>
+          <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+        </div>
+      </div>
+    </div>
+          <div class="card">
+            <div class="card-header">기숙사 생명존중교육</div>
+            <div class="card-footer">
+              <div>- 교수명: 기숙사</div>
+              <div>- 구분: 없음</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">사이버강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 학위과정 -->
+      <div class="section">
+        <h2>학위과정</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">자살예방교육</div>
+            <div class="card-footer">
+              <div>- 교수명: 학생상담센터</div>
+              <div>- 구분: 없음 / 0학점</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">사이버강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">마음챙김특강</div>
+            <div class="card-footer">
+              <div>- 교수명: 학생상담센터</div>
+              <div>- 구분: 없음 / 0학점</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">사이버강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">대학생활적응도 검사 해석동영상</div>
+            <div class="card-footer">
+              <div>- 교수명: 학생상담센터</div>
+              <div>- 구분: 없음 / 0학점</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">사이버강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">생활속의 한자</div>
+            <div class="card-footer">
+              <div>- 교수명: 변XX</div>
+              <div>- 구분: 없음 / 3학점</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">사이버강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 일반강의 -->
+      <div class="section">
+        <h2>일반강의</h2>
+        <div class="card-grid">
+    <!-- ✅ 딥러닝 영상처리 카드: DeepCV.html로 이동 -->
+    <div class="card light clickable" onclick="location.href='DeepCV.html'">
+      <div class="card-header">딥러닝 영상처리</div>
+      <div class="card-footer">
+        <div>- 교수명: 김XX</div>
+        <div>- 구분: 학필 / 3학점</div>
+        <div>- 학과명: 정보없음</div>
+        <div class="card-bottom">
+          <button class="type-btn">일반강의</button>
+          <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+        </div>
+      </div>
+    </div>
+          <div class="card light">
+            <div class="card-header">딥러닝 음성인식</div>
+            <div class="card-footer">
+              <div>- 교수명: 박XX</div>
+              <div>- 구분: 학필 / 3학점</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">일반강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+          <div class="card light">
+            <div class="card-header">AI 설계 및 프로젝트 심화</div>
+            <div class="card-footer">
+              <div>- 교수명: 정XX</div>
+              <div>- 구분: 학필 / 3학점</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">일반강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+          <div class="card light">
+            <div class="card-header">AI 프로젝트</div>
+            <div class="card-footer">
+              <div>- 교수명: 김XX</div>
+              <div>- 구분: 학필 / 3학점</div>
+              <div>- 학과명: 정보없음</div>
+              <div class="card-bottom">
+                <button class="type-btn">일반강의</button>
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="bell-icon">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

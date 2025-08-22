@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>유한대학교 캘린더</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      display: flex;
+      flex-direction: column;
+      background-color: #f5f5f5;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .main {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #117a8b;
+      color: white;
+      height: 100vh;
+      padding: 20px 15px;
+    }
+
+    .sidebar img {
+      width: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #0f5e71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      padding: 8px 0;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #0d5060;
+      padding-left: 5px;
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px 40px;
+      background-color: #f7f7f7;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .calendar-header button {
+      background-color: #455a64;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .calendar-header .right-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 10px;
+    }
+
+    .calendar-table th, .calendar-table td {
+      width: 14.28%;
+      height: 100px;
+      border: 1px solid #ccc;
+      vertical-align: top;
+      padding: 5px;
+      font-size: 13px;
+      position: relative;
+    }
+
+    .calendar-table th {
+      background-color: #e0e0e0;
+    }
+
+    .event {
+      margin-top: 5px;
+      font-size: 12px;
+      color: #004d40;
+      background: #b2dfdb;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 12px;
+      text-align: center;
+      color: #888;
+    }
+
+    /* ✅ 오늘 날짜 스타일 */
+    .today {
+      background-color: #fff3cd !important;
+      border: 2px solid #ffc107;
+    }
+
+    /* 팝업 스타일 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      background: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .modal-buttons {
+      text-align: right;
+    }
+
+    .modal-buttons button {
+      margin-left: 5px;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ 상단 헤더 -->
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고" style="height: 70px;"></a>
+    </div>
+  </div>
+
+  <div class="main">
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="#">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <div class="content">
+      <h2>캘린더</h2>
+      <div class="calendar-header">
+        <div>
+          <button id="prevMonthBtn">이전달</button>
+          <button id="nextMonthBtn">다음달</button>
+          <button id="todayBtn">오늘</button>
+        </div>
+        <strong id="currentMonth">2025년 8월</strong>
+        <div class="right-btns">
+          <button>월</button>
+          <button>주</button>
+          <button>일</button>
+          <button>일정목록</button>
+        </div>
+      </div>
+
+      <table class="calendar-table" id="calendar">
+        <thead>
+          <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+          </tr>
+        </thead>
+        <tbody id="calendar-body">
+          <!-- 날짜 셀 채워짐 -->
+        </tbody>
+      </table>
+
+      <div class="footer">
+        [유한대학교] 14780 경기도 부천시 경인로 590 (괴안동 185-34) 대학 전화: 02-2610-0600 팩스(FAX): 02-2610-0469
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ 팝업창 -->
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal" id="eventModal">
+    <h3>일정 추가</h3>
+    <p id="selected-date-text"></p>
+    <input type="text" id="eventInput" placeholder="일정 내용을 입력하세요">
+    <div class="modal-buttons">
+      <button onclick="closeModal()">취소</button>
+      <button onclick="saveEvent()">저장</button>
+    </div>
+  </div>
+
+  <!-- ✅ JavaScript -->
+  <script>
+    let currentDate = new Date(2025, 7); // 2025년 8월
+    let selectedCell = null;
+    const events = {}; // 날짜별 일정 저장 객체
+
+    function updateCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const lastDate = new Date(year, month + 1, 0).getDate();
+      document.getElementById('currentMonth').innerText = `${year}년 ${month + 1}월`;
+
+      const calendarBody = document.getElementById('calendar-body');
+      calendarBody.innerHTML = '';
+
+      let row = document.createElement('tr');
+      for (let i = 0; i < firstDay; i++) {
+        row.appendChild(document.createElement('td'));
+      }
+
+      const today = new Date();
+
+      for (let date = 1; date <= lastDate; date++) {
+        const cell = document.createElement('td');
+        cell.innerHTML = `<div>${date}일</div>`;
+        cell.dataset.date = `${year}-${month + 1}-${date}`;
+        cell.onclick = () => openModal(cell);
+
+        // ✅ 오늘 날짜 강조
+        if (
+          date === today.getDate() &&
+          month === today.getMonth() &&
+          year === today.getFullYear()
+        ) {
+          cell.classList.add('today');
+        }
+
+        const key = cell.dataset.date;
+        if (events[key]) {
+          const eventEl = document.createElement('div');
+          eventEl.className = 'event';
+          eventEl.textContent = events[key];
+          cell.appendChild(eventEl);
+        }
+
+        row.appendChild(cell);
+
+        if ((firstDay + date - 1) % 7 === 6) {
+          calendarBody.appendChild(row);
+          row = document.createElement('tr');
+        }
+      }
+
+      if (row.children.length > 0) {
+        while (row.children.length < 7) {
+          row.appendChild(document.createElement('td'));
+        }
+        calendarBody.appendChild(row);
+      }
+    }
+
+    function openModal(cell) {
+      selectedCell = cell;
+      const dateText = cell.dataset.date;
+      document.getElementById('selected-date-text').innerText = `${dateText} 일정 입력`;
+      document.getElementById('eventInput').value = '';
+      document.getElementById('eventModal').style.display = 'block';
+      document.getElementById('modal-backdrop').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('eventModal').style.display = 'none';
+      document.getElementById('modal-backdrop').style.display = 'none';
+    }
+
+    function saveEvent() {
+      const text = document.getElementById('eventInput').value;
+      if (text && selectedCell) {
+        const date = selectedCell.dataset.date;
+        events[date] = text;
+        updateCalendar(); // 다시 렌더링
+      }
+      closeModal();
+    }
+
+    document.getElementById('prevMonthBtn').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      updateCalendar();
+    });
+
+    document.getElementById('nextMonthBtn').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      updateCalendar();
+    });
+
+    document.getElementById('todayBtn').addEventListener('click', () => {
+      currentDate = new Date();
+      updateCalendar();
+    });
+
+    updateCalendar();
+  </script>
+</body>
+</html>

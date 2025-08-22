@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>딥러닝 영상처리</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .top-bar {
+      background-color: #3a434a;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .top-bar span:last-child {
+      font-size: 13px;
+      font-weight: normal;
+    }
+
+    .main-container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .video-list {
+      width: 250px;
+      background-color: #e0e0e0;
+      color: #333;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .video-item {
+      background-color: #f8f8f8;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .video-item.active {
+      border: 2px solid #f8c51c;
+      background-color: #fff7d6;
+    }
+
+    .video-item .title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .video-item .label {
+      font-size: 12px;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    .video-content {
+      flex: 1;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 1600px;
+      margin-top: 40px auto;
+    }
+
+    .learning-time {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+      background-color: #222;
+      padding: 6px 12px;
+      border-radius: 20px;
+      color: #fff;
+    }
+
+    video {
+      width: 100%;
+      height: 800px;
+      border: 4px solid #666;
+      border-radius: 8px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div>[2025-1학기] 딥러닝 영상처리 🛈</div>
+    <span>학습기간: 2025-03-12 ~ 2025-03-24</span>
+  </div>
+
+  <div class="main-container">
+    <aside class="video-list">
+      <div class="video-item active">
+        <div class="title">1 [Live] DIP-week 강의</div>
+        <div class="label">LIVE 방송 중</div>
+      </div>
+      <div class="video-item">
+        <div class="title">2 [자료] DIP-Week 1-1(필기)</div>
+        <div class="label">다운로드 완료</div>
+      </div>
+      <div class="video-item">
+        <div class="title">3 [동영상] DIP-Week 1-2</div>
+        <div class="label">학습완료</div>
+      </div>
+      <div class="video-item">
+        <div class="title">4 [자료] lena.jpg</div>
+        <div class="label">다운로드 완료</div>
+      </div>
+      <div class="video-item">
+        <div class="title">5 [자료] DIP-Week 1-2(필기)</div>
+        <div class="label">다운로드 완료</div>
+      </div>
+    </aside>
+
+    <section class="video-content">
+      <div class="learning-time">학습시간: <span id="time">00:00:00</span></div>
+      <div class="video-wrapper">
+        <video id="videoPlayer" controls></video>
+      </div>
+    </section>
+  </div>
+
+  <!-- ✅ HLS.js for Live Station -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const streamKey = "wztrcirlznlx81xatx8d1aliaanfgbb7";  // Live Station에서 발급된 스트림 키
+    const videoSrc = `https://gzrfwnxx11490.edge.naverncp.com/live/video/ls-20250806112855-IN1S7/playlist.m3u8`;
+
+    const video = document.getElementById('videoPlayer');
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+      video.addEventListener('loadedmetadata', function () {
+        video.play();
+      });
+    }
+
+    // 학습시간 계산
+    const timeSpan = document.getElementById('time');
+    function formatTime(sec) {
+      const h = String(Math.floor(sec / 3600)).padStart(2, '0');
+      const m = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+      const s = String(sec % 60).padStart(2, '0');
+      return `${h}:${m}:${s}`;
+    }
+
+    video.addEventListener('timeupdate', () => {
+      const current = Math.floor(video.currentTime);
+      timeSpan.textContent = formatTime(current);
+    });
+  </script>
+
+</body>
+</html>

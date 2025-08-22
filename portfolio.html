@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>기본 포트폴리오</title>
+  <style>
+    /* ===== 공통 ===== */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      color: #222;
+    }
+
+    /* ===== 상단 헤더 ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #dcdcdc;
+    }
+    .logo img { height: 70px; cursor: pointer; }
+
+    /* ===== 레이아웃 ===== */
+    .main-body { display: flex; min-height: calc(100vh - 90px); }
+    .sidebar {
+      width: 240px; background-color: #117a8b; color: #fff;
+      padding: 20px 15px;
+    }
+    .sidebar img { width: 100px; border-radius: 50%; display: block; margin: 0 auto; }
+    .sidebar h3 { text-align: center; margin: 10px 0 6px; font-size: 16px; font-weight: 600; }
+    .sidebar button {
+      width: 100%; margin-top: 10px; padding: 8px;
+      background-color: #0f5e71; color: #fff; border: 0; border-radius: 4px; cursor: pointer;
+    }
+    .sidebar nav { margin-top: 18px; }
+    .sidebar nav a {
+      display: block; color: #fff; text-decoration: none; font-size: 14px; padding: 8px 4px; border-radius: 4px;
+    }
+    .sidebar nav a:hover { background-color: #0d5060; }
+
+    .main-content {
+      flex: 1;
+      background: #efefef;
+      padding: 24px 26px 40px;
+      border-left: 1px solid #e9e9e9;
+    }
+
+    /* ===== 페이지 타이틀 ===== */
+    .page-title {
+      font-size: 22px; font-weight: 700; color: #222;
+      margin: 6px 0 12px;
+    }
+
+    /* ===== 탭 바 ===== */
+    .tabs {
+      display: flex; gap: 0;
+      border-bottom: 1px solid #d9d9d9;
+      background: #f6f6f6;
+      padding: 0 10px;
+    }
+    .tab {
+      padding: 12px 18px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: none;
+      margin-bottom: -1px;
+    }
+    .tab:hover { color: #222; }
+    .tab.active {
+      background: #ffffff;
+      color: #000;
+      border: 1px solid #d9d9d9;
+      border-bottom: 1px solid #ffffff;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ===== 섹션 헤더 라벨 (개인 이력) ===== */
+    .section-head {
+      font-size: 16px; font-weight: 700; color: #000;
+      margin: 16px 0 10px;
+    }
+    .divider { height: 1px; background: #1a1a1a; margin-bottom: 10px; }
+
+    /* ===== 개인 이력 테이블 ===== */
+    .profile-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #fff;
+    }
+    .profile-table th,
+    .profile-table td {
+      border: 1px solid #e3e3e3;
+      padding: 14px 16px;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+    .profile-table th {
+      width: 140px;
+      background: #fafafa;
+      text-align: center;
+      color: #333;
+      font-weight: 600;
+    }
+    .profile-photo-cell {
+      width: 420px;
+      text-align: center;
+    }
+    .photo-box {
+      width: 140px; height: 140px;
+      background: #f2f2f2;
+      border: 1px solid #dcdcdc;
+      border-radius: 2px;
+      margin: 10px auto;
+      display: flex; align-items: center; justify-content: center;
+      color: #999; font-size: 12px;
+      overflow: hidden;
+    }
+    .photo-box img { max-width: 100%; max-height: 100%; display: block; }
+
+    /* ===== 에디터 툴바/본문 ===== */
+    .editor-wrap {
+      margin-top: 18px;
+      border: 1px solid #dcdcdc;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .toolbar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+      background: #f6f6f6;
+      border-bottom: 1px solid #e1e1e1;
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+    .tool-btn, .tool-select {
+      background: #fff; border: 1px solid #d6d6d6; border-radius: 2px;
+      padding: 6px 8px; cursor: pointer;
+    }
+    .tool-btn:hover { background: #fafafa; }
+    .tool-sep { width: 1px; height: 22px; background: #e1e1e1; margin: 0 2px; }
+
+    .editor-area {
+      min-height: 360px;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      outline: none;
+      background: #fff;
+    }
+
+    /* ===== 하단 푸터(회색 문구) ===== */
+    .page-footer {
+      color: #888; font-size: 12px; margin-top: 10px;
+    }
+
+    /* 반응형 조금만 */
+    @media (max-width: 1100px) {
+      .profile-photo-cell { width: 260px; }
+      .photo-box { width: 120px; height: 120px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 헤더 -->
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고"></a>
+    </div>
+    <div class="header-right"></div>
+  </div>
+
+  <div class="main-body">
+    <!-- 좌측 사이드바 -->
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="calendar.html">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <!-- 우측 본문 -->
+    <main class="main-content">
+      <div class="page-title">기본포트폴리오</div>
+
+      <!-- 탭 네비게이션 -->
+      <div class="tabs">
+        <div class="tab active">기본포트폴리오</div>
+        <div class="tab" onclick="alert('기타포트폴리오 탭은 데모입니다.')">기타포트폴리오</div>
+        <div class="tab" onclick="alert('공개포트폴리오 탭은 데모입니다.')">공개포트폴리오</div>
+        <div class="tab" onclick="alert('분류관리 탭은 데모입니다.')">분류관리</div>
+        <div class="tab" onclick="alert('표준이력 탭은 데모입니다.')">표준이력</div>
+      </div>
+
+      <!-- 섹션 타이틀 라인 -->
+      <div class="section-head">개인 이력</div>
+      <div class="divider"></div>
+
+      <!-- 개인 이력 표 -->
+      <table class="profile-table">
+        <colgroup>
+          <col style="width: 32%;">
+          <col style="width: 18%;">
+          <col>
+        </colgroup>
+        <tr>
+          <td class="profile-photo-cell" rowspan="4">
+            <div class="photo-box" id="photoBox">
+              사진 업로드
+            </div>
+          </td>
+          <th>아이디</th>
+          <td>21619001</td>
+        </tr>
+        <tr>
+          <th>학과</th>
+          <td>인공지능학과</td>
+        </tr>
+        <tr>
+          <th>이름</th>
+          <td>강민수</td>
+        </tr>
+        <tr>
+          <th>E-mail</th>
+          <td>kmsoo0929@naver.com</td>
+        </tr>
+      </table>
+
+      <!-- 에디터 박스 -->
+      <div class="editor-wrap" style="margin-top: 20px;">
+        <div class="toolbar">
+          <button class="tool-btn" onclick="execCmd('bold')"><b>B</b></button>
+          <button class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
+          <button class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn" onclick="execCmd('insertUnorderedList')">•</button>
+          <button class="tool-btn" onclick="execCmd('insertOrderedList')">1.</button>
+          <div class="tool-sep"></div>
+
+          <!-- ▼▼ 변경된 부분: 크기 선택 -->
+          <select id="fontSizeSelect" class="tool-select">
+            <option value="">크기</option>
+            <option value="10px">10</option>
+            <option value="11px">11</option>
+            <option value="12px">12</option>
+            <option value="13px">13</option>
+            <option value="14px">14</option>
+          </select>
+
+          <button class="tool-btn" onclick="execCmd('justifyLeft')">L</button>
+          <button class="tool-btn" onclick="execCmd('justifyCenter')">M</button>
+          <button class="tool-btn" onclick="execCmd('justifyRight')">R</button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn" onclick="insertLink()">link</button>
+          <button class="tool-btn" onclick="insertImage()">Image</button>
+        </div>
+        <div id="editor" class="editor-area" contenteditable="true" spellcheck="false">
+          포트폴리오 소개, 활동 이력 등을 작성하세요.
+        </div>
+      </div>
+
+      <div class="page-footer">
+          [유한대학교] 14780 경기도 부천시 경인로 590 (괴안동 185-34) 대학 전화: 02-2610-0600 팩스(FAX): 02-2610-0469
+      </div>
+    </main>
+  </div>
+
+  <script>
+  // 공용 명령 (기존 그대로)
+  function execCmd(cmd, val = null) {
+    document.execCommand(cmd, false, val);
+    document.getElementById('editor').focus();
+  }
+  function insertLink() {
+    const url = prompt('링크 주소(URL)를 입력하세요:');
+    if (url) execCmd('createLink', url);
+  }
+  function insertImage() {
+    const url = prompt('이미지 주소(URL)를 입력하세요:');
+    if (url) execCmd('insertImage', url);
+  }
+
+  // 사진 업로드 (기존 그대로)
+  const photoBox = document.getElementById('photoBox');
+  if (photoBox) {
+    photoBox.addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = evt => {
+          photoBox.innerHTML = '';
+          const img = document.createElement('img');
+          img.src = evt.target.result;
+          photoBox.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    });
+  }
+
+  // ===== 폰트 크기(px) 확실 적용 =====
+  (function attachFontSizeHandler(){
+    const select = document.getElementById('fontSizeSelect');
+    const editor = document.getElementById('editor');
+
+    if (!select || !editor) return;
+
+    const isInside = (container, node) => {
+      while (node) {
+        if (node === container) return true;
+        node = node.parentNode;
+      }
+      return false;
+    };
+
+    select.addEventListener('change', function () {
+      const size = this.value;   // "12px" 등
+      if (!size) return;
+
+      editor.focus();
+      const sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0) { this.value = ""; return; }
+
+      // 선택이 에디터 안이 아니면 무시
+      if (!isInside(editor, sel.anchorNode)) { this.value = ""; return; }
+
+      const range = sel.getRangeAt(0);
+
+      // 1) 범위가 비어있으면: 그 위치에 span을 넣고 캐럿을 안으로 이동
+      if (range.collapsed) {
+        const span = document.createElement('span');
+        span.style.fontSize = size;
+        span.appendChild(document.createTextNode('\u200B')); // zero-width space
+        range.insertNode(span);
+
+        // 캐럿을 span 안으로
+        sel.removeAllRanges();
+        const newRange = document.createRange();
+        newRange.setStart(span.firstChild, 1);
+        newRange.collapse(true);
+        sel.addRange(newRange);
+        editor.normalize();
+      } else {
+        // 2) 범위가 있으면: 선택 내용을 추출해 span으로 감싸기
+        const frag = range.extractContents();
+        const span = document.createElement('span');
+        span.style.fontSize = size;
+        span.appendChild(frag);
+        range.insertNode(span);
+
+        // 선택을 새 span으로 재설정 (끝쪽에 캐럿)
+        sel.removeAllRanges();
+        const newRange = document.createRange();
+        newRange.selectNodeContents(span);
+        newRange.collapse(false);
+        sel.addRange(newRange);
+        editor.normalize();
+      }
+
+      // 드롭다운 초기화
+      this.value = "";
+    });
+  })();
+</script>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>교과강의관리</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo img {
+      height: 70px;
+    }
+
+    .main-body {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #117a8b;
+      color: white;
+      height: 100vh;
+      padding: 20px 15px;
+      box-sizing: border-box;
+    }
+
+    .sidebar img {
+      width: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #0f5e71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      padding: 8px 0;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #0d5060;
+      padding-left: 5px;
+    }
+
+    .main-content {
+      flex: 1;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 20px;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    table th {
+      background-color: #f4f4dc;
+    }
+
+    .btn-print {
+      background-color: #333;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .footer {
+      font-size: 12px;
+      text-align: center;
+      color: #888;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고" style="height: 70px;"></a>
+    </div>
+  </div>
+
+  <div class="main-body">
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="calendar.html">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="section-title">수료증 출력</div>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>교육명</th>
+            <th>수료 기준 출석률</th>
+            <th>나의 출석률</th>
+            <th>수료여부</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tbody>
+  <tr>
+    <td>1</td>
+    <td>2025 - 1학기 소방안전교육(기숙사)</td>
+    <td>100%</td>
+    <td>100%</td>
+    <td><button class="btn-print" onclick="window.open('certificate.html', '_blank', 'width=800,height=1000')">수료증출력</button></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>2025년도 현장실습 사전교육(OT)</td>
+    <td>100%</td>
+    <td>100%</td>
+    <td><button class="btn-print" onclick="window.open('certificate.html', '_blank', 'width=800,height=1000')">수료증출력</button></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>2025년도 생명존중교육</td>
+    <td>100%</td>
+    <td>100%</td>
+    <td><button class="btn-print" onclick="window.open('certificate.html', '_blank', 'width=800,height=1000')">수료증출력</button></td>
+  </tr>
+</tbody>
+
+          <!-- 추가 행 생략 -->
+        </tbody>
+      </table>
+      <div class="footer">
+        [유한대학교] 14780 경기도 부천시 경인로 590 (괴안동 185-34) 대학 전화: 02-2610-0600 팩스(FAX): 02-2610-0469
+      </div>
+    </main>
+  </div>
+</body>
+</html>

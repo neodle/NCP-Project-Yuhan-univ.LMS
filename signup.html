@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>회원가입</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans KR', Arial, sans-serif;
+      background-color: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .signup-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .signup-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+    .signup-container input,
+    .signup-container select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .verify-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .verify-btn {
+      white-space: nowrap;
+      background: #117a8b;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .signup-container button[type="submit"] {
+      width: 100%;
+      background: #117a8b;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 300px;
+    }
+    .popup-box h3 { margin-bottom: 10px; }
+    .popup-box p {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 10px 0;
+      letter-spacing: 2px;
+    }
+    .popup-box .timer {
+      font-size: 14px;
+      color: #888;
+    }
+    .popup-box button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #117a8b;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .hint { font-size: 12px; color: #777; margin-top: -10px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>회원가입</h2>
+
+    <form id="signupForm" novalidate>
+      <label for="userid">아이디</label>
+      <input type="text" id="userid" autocomplete="username" required maxlength="50" />
+
+      <label for="pw">비밀번호</label>
+      <input type="password" id="pw" autocomplete="new-password" required minlength="4" maxlength="64" />
+
+      <label for="pw-confirm">비밀번호 재확인</label>
+      <input type="password" id="pw-confirm" autocomplete="new-password" required minlength="4" maxlength="64" />
+
+      <label for="name">이름</label>
+      <input type="text" id="name" maxlength="255" />
+
+      <label>생년월일</label>
+      <div class="verify-container">
+        <input type="number" id="birthYear" placeholder="년(4자)" min="1900" max="2100" />
+        <select id="birthMonth">
+          <option value="">월</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+          <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+        </select>
+        <input type="number" id="birthDay" placeholder="일" min="1" max="31" />
+      </div>
+
+      <label for="gender">성별</label>
+      <select id="gender">
+        <option value="">성별</option>
+        <option value="남성">남성</option>
+        <option value="여성">여성</option>
+        <option value="기타">기타</option>
+      </select>
+
+      <label>본인 확인 이메일 <small>(선택)</small></label>
+      <input type="email" id="email" placeholder="선택입력" maxlength="100" />
+
+      <label>휴대전화</label>
+      <select id="country">
+        <option value="+82">대한민국 +82</option>
+        <option value="+1">미국 +1</option>
+        <option value="+81">일본 +81</option>
+      </select>
+
+      <div class="verify-container">
+        <input type="text" id="phone" placeholder="전화번호 입력" inputmode="numeric" maxlength="20" />
+        <button type="button" class="verify-btn" onclick="showVerificationCode()">인증번호 받기</button>
+      </div>
+
+      <input type="text" id="inputCode" placeholder="인증번호를 입력하세요" inputmode="numeric" maxlength="6" />
+
+      <button type="submit" id="submitBtn">가입하기</button>
+    </form>
+  </div>
+
+  <!-- 팝업창 -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <h3>인증번호</h3>
+      <p id="code">123456</p>
+      <div class="timer" id="timer">남은 시간: 03:00</div>
+      <button onclick="closePopup()">확인</button>
+    </div>
+  </div>
+
+  <script>
+    // --- 설정 ---
+    // API가 /api 하위에 프록시되어 있다면 기본값 유지
+    // (만약 프록시 없이 바로 8080에 붙는다면 'http://WAS_IP:8080' 등으로 바꾸세요)
+    const API_BASE = '/api';
+
+    // --- 인증번호 팝업 & 타이머 ---
+    let timerInterval;
+    let generatedCode = '';
+
+    function showVerificationCode() {
+      generatedCode = String(Math.floor(100000 + Math.random() * 900000));
+      document.getElementById('code').innerText = generatedCode;
+      document.getElementById('popup').style.display = 'flex';
+
+      let time = 180;
+      updateTimer(time);
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        time--;
+        updateTimer(time);
+        if (time <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById('code').innerText = '만료되었습니다';
+          document.getElementById('timer').innerText = '';
+        }
+      }, 1000);
+    }
+
+    function updateTimer(sec) {
+      const m = String(Math.floor(sec / 60)).padStart(2, '0');
+      const s = String(sec % 60).padStart(2, '0');
+      document.getElementById('timer').innerText = `남은 시간: ${m}:${s}`;
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      clearInterval(timerInterval);
+      document.getElementById('inputCode').value = generatedCode;
+    }
+
+    // --- 유틸 ---
+    function isValidDate(y, m, d) {
+      if (!y || !m || !d) return false;
+      const yy = parseInt(y, 10), mm = parseInt(m, 10), dd = parseInt(d, 10);
+      if (String(yy).length !== 4 || mm < 1 || mm > 12 || dd < 1 || dd > 31) return false;
+      const dt = new Date(yy, mm - 1, dd);
+      return dt.getFullYear() === yy && (dt.getMonth() + 1) === mm && dt.getDate() === dd;
+    }
+
+    function toApiGender(v) {
+      if (!v) return null;
+      if (v === '남성') return 'male';
+      if (v === '여성') return 'female';
+      return 'other';
+    }
+
+    function onlyDigits(str) {
+      return (str || '').replace(/[^0-9]/g, '');
+    }
+
+    // --- 폼 제출 ---
+    document.getElementById('signupForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const submitBtn  = document.getElementById('submitBtn');
+      const id         = document.getElementById('userid').value.trim();
+      const pw         = document.getElementById('pw').value.trim();
+      const confirmPw  = document.getElementById('pw-confirm').value.trim();
+      const name       = document.getElementById('name').value.trim();
+      const email      = document.getElementById('email').value.trim();
+      const genderK    = document.getElementById('gender').value;
+      const gender     = toApiGender(genderK);
+      const birthYear  = document.getElementById('birthYear').value.trim();
+      const birthMonth = document.getElementById('birthMonth').value.trim();
+      const birthDay   = document.getElementById('birthDay').value.trim();
+      const phoneRaw   = document.getElementById('phone').value.trim();
+      const country    = document.getElementById('country').value;
+
+      // 인증번호 확인
+      const inputCode  = document.getElementById('inputCode').value.trim();
+      if (generatedCode && inputCode !== generatedCode) {
+        alert('인증번호가 일치하지 않습니다.');
+        return;
+      }
+
+      if (pw !== confirmPw) {
+        alert('비밀번호와 재확인이 일치하지 않습니다.');
+        return;
+      }
+
+      // 생년월일 유효성(모두 입력된 경우에만 체크)
+      if ((birthYear || birthMonth || birthDay) && !isValidDate(birthYear, birthMonth, birthDay)) {
+        alert('생년월일을 정확히 입력해주세요.');
+        return;
+      }
+
+      // 전화 정규화(+국가코드 + 숫자만)
+      const phoneDigits = onlyDigits(phoneRaw);
+      const phone = phoneDigits ? `${country}${phoneDigits}` : null;
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '처리 중...';
+
+        const payload = {
+          username: id,
+          password: pw,
+          email: email || null,
+          name: name || null,           // 백엔드에서 name -> full_name으로 매핑해 사용 가능
+          gender: gender,               // ('male' | 'female' | 'other' | null)
+          birthYear:  birthYear || null,
+          birthMonth: birthMonth || null,
+          birthDay:   birthDay || null,
+          phone: phone
+        };
+
+        const res = await fetch(`${API_BASE}/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        // 서버가 HTML(404/에러) 를 돌려줘도 깔끔하게 보이도록 text -> JSON 파싱
+        const text = await res.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (parseErr) {
+          alert(
+            `서버가 JSON이 아닌 응답을 보냈습니다. (HTTP ${res.status})\n` +
+            text.slice(0, 300)
+          );
+          return;
+        }
+
+        if (res.ok && data && data.success) {
+          alert('회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.');
+          // 필요 시 실제 로그인 페이지 경로로 변경
+          window.location.href = 'index.html';
+        } else {
+          alert('회원가입 실패: ' + (data.message || `HTTP ${res.status}`));
+        }
+      } catch (err) {
+        alert('서버 오류: ' + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '가입하기';
+      }
+    });
+  </script>
+</body>
+</html>

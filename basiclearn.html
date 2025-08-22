@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>기초학습역량</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo img {
+      height: 70px;
+    }
+
+    .main-body {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #117a8b;
+      color: white;
+      height: 100vh;
+      padding: 20px 15px;
+      box-sizing: border-box;
+    }
+
+    .sidebar img {
+      width: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #0f5e71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      padding: 8px 0;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #0d5060;
+      padding-left: 5px;
+    }
+
+    .main-content {
+      flex: 1;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .tab-menu {
+      display: flex;
+      gap: 20px;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .tab-menu a {
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    .tab-menu a.active {
+      border-bottom: 3px solid #117a8b;
+      color: #117a8b;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: flex-end;
+      gap: 5px;
+      margin-bottom: 15px;
+    }
+
+    .search-box select,
+    .search-box input[type="text"],
+    .search-box button {
+      padding: 5px;
+      font-size: 14px;
+    }
+
+    .notice-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fdfdfd;
+    }
+
+    .notice-table th,
+    .notice-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .notice-table th {
+      background-color: #f4f4dc;
+    }
+
+    .notice-table td.empty {
+      text-align: center;
+      padding: 30px;
+      font-style: italic;
+      color: #888;
+    }
+
+    .footer {
+      font-size: 12px;
+      text-align: center;
+      color: #888;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고" style="height: 70px;"></a>
+    </div>
+  </div>
+
+  <div class="main-body">
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="calendar.html">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="section-title">공지사항</div>
+
+      <div class="tab-menu">
+        <a href="#" id="tab-notice" class="active">공지사항</a>
+        <a href="#" id="tab-diagnosis">진단하기</a>
+        <a href="#" id="tab-result">결과보기</a>
+        <a href="#" id="tab-cert">인증서 출력</a>
+      </div>
+
+      <div class="search-box">
+        <select>
+          <option>제목</option>
+          <option>작성자</option>
+        </select>
+        <input type="text" placeholder="검색어 입력">
+        <button>검색하기</button>
+      </div>
+
+      <table class="notice-table">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>등록일</th>
+            <th>조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="empty" colspan="5">등록된 게시물이 없습니다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="footer">
+        [유한대학교] 14780 경기도 부천시 경인로 590 (괴안동 185-34) 대학 전화: 02-2610-0600 팩스(FAX): 02-2610-0469
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-menu a');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.preventDefault();
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

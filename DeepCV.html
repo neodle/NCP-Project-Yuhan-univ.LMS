@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>딥러닝영상처리 강의</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo img {
+      height: 70px;
+      cursor: pointer;
+    }
+
+    .main-body {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #117a8b;
+      color: white;
+      height: 100vh;
+      padding: 20px 15px;
+      box-sizing: border-box;
+    }
+
+    .sidebar img {
+      width: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #0f5e71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      padding: 8px 0;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .page-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .lecture-section {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .lecture-header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #7d6c6d;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px 6px 0 0;
+      font-weight: bold;
+    }
+
+    .lecture-item {
+      border-top: 1px solid #eee;
+      padding: 15px 20px;
+      background-color: #fff;
+    }
+
+    .lecture-item:hover {
+      background-color: #f9f9f9;
+    }
+
+    .lecture-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .lecture-meta {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .lecture-actions {
+      margin-top: 10px;
+    }
+
+    .lecture-actions button {
+      background-color: #8b4b5c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .lecture-actions button:hover {
+      background-color: #a34c63;
+    }
+
+    .week-label {
+      margin: 30px 0 10px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .time-info {
+      text-align: right;
+      color: #222;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: -10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고"></a>
+    </div>
+  </div>
+
+  <div class="main-body">
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="calendar.html">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-title">[2025-1학기] 딥러닝영상처리 </div>
+
+      <div class="lecture-section">
+        <div class="lecture-header">
+          <span>1회차: 1주 <small>(출석여부: 출석반영)</small></span>
+          <span class="time-info">학습기간: 25.03.03 ~ 25.03.08 | 학습시간: 240분</span>
+        </div>
+
+        <div class="lecture-item">
+          <div class="lecture-title">DIP-Week1-1 | 출석인정시간: 120분</div>
+          <div class="lecture-meta">학습기간: 25.03.03 ~ 25.03.08 | 참여여부: 완료 (다운 수: 2회)</div>
+          <div class="lecture-actions"><button onclick="location.href='studyDeepCV.html'">학습하기</button></div>
+        </div>
+        
+        <div class="lecture-item">
+          <div class="lecture-title">DIP-Week1-1(필기) | 출석인정시간: 120분</div>
+          <div class="lecture-meta">학습기간: 25.03.03 ~ 25.03.08 | 참여여부: 완료 (다운 수: 5회)</div>
+          <div class="lecture-actions"><button>학습하기</button></div>
+        </div>
+        
+        <div class="lecture-header">
+          <span>2회차: 1주 <small>(출석여부: 출석반영)</small></span>
+          <span class="time-info">학습기간: 25.03.10 ~ 25.03.15 | 학습시간: 240분</span>
+        </div>
+
+        <div class="lecture-item">
+          <div class="lecture-title">DIP-Week1-2 | 출석인정시간: 60분</div>
+          <div class="lecture-meta">학습기간: 25.03.03 ~ 25.03.08 | 참여여부: 완료 (다운 수: 2회)</div>
+          <div class="lecture-actions"><button>학습하기</button></div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-title">lena.jpg | 출석인정시간: 60분</div>
+          <div class="lecture-meta">학습기간: 25.03.03 ~ 25.03.08 | 참여여부: 완료 (다운 수: 1회)</div>
+          <div class="lecture-actions"><button>학습하기</button></div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-title">DIP-Week1-2(필기) | 출석인정시간: 60분</div>
+          <div class="lecture-meta">학습기간: 25.03.03 ~ 25.03.08 | 참여여부: 완료 (다운 수: 2회)</div>
+          <div class="lecture-actions"><button>학습하기</button></div>
+        </div>
+
+        <!-- 여기에 2주차 강의 내용 추가 가능 -->
+      </div>
+    </main>
+  </div>
+</body>
+</html>

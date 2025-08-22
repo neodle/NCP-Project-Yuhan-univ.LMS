@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>소방안전교육 강의</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo img {
+      height: 70px;
+      cursor: pointer;
+    }
+
+    .main-body {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #117a8b;
+      color: white;
+      height: 100vh;
+      padding: 20px 15px;
+      box-sizing: border-box;
+    }
+
+    .sidebar img {
+      width: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #0f5e71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      padding: 8px 0;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .page-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .lecture-section {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .lecture-header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #7d6c6d;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px 6px 0 0;
+      font-weight: bold;
+    }
+
+    .lecture-item {
+      border-top: 1px solid #eee;
+      padding: 15px 20px;
+      background-color: #fff;
+    }
+
+    .lecture-item:hover {
+      background-color: #f9f9f9;
+    }
+
+    .lecture-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .lecture-meta {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .lecture-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .lecture-actions button {
+      background-color: #8b4b5c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .lecture-actions button:hover {
+      background-color: #a34c63;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고"></a>
+    </div>
+  </div>
+
+  <div class="main-body">
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="calendar.html">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-title">2025-1학기 소방안전교육(기숙사)</div>
+
+      <div class="lecture-section">
+        <div class="lecture-header">
+          <span>1주차</span>
+          <span>학습기간: 25.03.12 ~ 25.03.24 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학습시간: <strong>53분</strong></span>
+        </div>
+
+        <!-- 반복되는 강의 콘텐츠 -->
+        <div class="lecture-item">
+          <div class="lecture-title">2025-1학기 소방안전교육 (영상콘텐츠(MP4)) | 출석인정시간: 2분</div>
+          <div class="lecture-meta">학습시간 03분03초 (완료) | 학습기간: 25.03.12 ~ 25.03.24 23:59</div>
+          <div class="lecture-actions">
+            <button onclick="alert('학습안내 페이지는 준비 중입니다.')">학습안내</button>
+            <button onclick="location.href='studyFS.html'">학습하기</button>
+          </div>
+
+        </div>
+
+        <div class="lecture-item">
+          <div class="lecture-title">2025-1학기 소방안전교육 (영상콘텐츠(MP4)) | 출석인정시간: 2분</div>
+          <div class="lecture-meta">학습시간 03분25초 (완료) | 학습기간: 25.03.12 ~ 25.03.24 23:59</div>
+          <div class="lecture-actions">
+            <button>학습안내</button>
+            <button>학습하기</button>
+          </div>
+        </div>
+
+        <div class="lecture-header">
+          <span>2주차</span>
+          <span>학습기간: 25.03.12 ~ 25.03.24 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학습시간: <strong>53분</strong></span>
+        </div>
+
+        <!-- 반복되는 강의 콘텐츠 -->
+        <div class="lecture-item">
+          <div class="lecture-title">2025-1학기 소방안전교육 (영상콘텐츠(MP4)) | 출석인정시간: 2분</div>
+          <div class="lecture-meta">학습시간 03분03초 (완료) | 학습기간: 25.03.12 ~ 25.03.24 23:59</div>
+          <div class="lecture-actions">
+            <button>학습안내</button>
+            <button>학습하기</button>
+          </div>
+        </div>
+
+        <div class="lecture-item">
+          <div class="lecture-title">2025-1학기 소방안전교육 (영상콘텐츠(MP4)) | 출석인정시간: 2분</div>
+          <div class="lecture-meta">학습시간 03분25초 (완료) | 학습기간: 25.03.12 ~ 25.03.24 23:59</div>
+          <div class="lecture-actions">
+            <button>학습안내</button>
+            <button>학습하기</button>
+          </div>
+        </div>
+
+         <div class="lecture-header">
+          <span>3주차</span>
+          <span>학습기간: 25.03.12 ~ 25.03.24 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학습시간: <strong>53분</strong></span>
+        </div>
+
+        <!-- 반복되는 강의 콘텐츠 -->
+        <div class="lecture-item">
+          <div class="lecture-title">2025-1학기 소방안전교육 (영상콘텐츠(MP4)) | 출석인정시간: 2분</div>
+          <div class="lecture-meta">학습시간 03분03초 (완료) | 학습기간: 25.03.12 ~ 25.03.24 23:59</div>
+          <div class="lecture-actions">
+            <button>학습안내</button>
+            <button>학습하기</button>
+          </div>
+        </div>
+
+        <div class="lecture-item">
+          <div class="lecture-title">2025-1학기 소방안전교육 (영상콘텐츠(MP4)) | 출석인정시간: 2분</div>
+          <div class="lecture-meta">학습시간 03분25초 (완료) | 학습기간: 25.03.12 ~ 25.03.24 23:59</div>
+          <div class="lecture-actions">
+            <button>학습안내</button>
+            <button>학습하기</button>
+          </div>
+        </div>
+
+        <!-- 추가 콘텐츠는 복사하여 이어 붙이면 됨 -->
+      </div>
+    </main>
+  </div>
+</body>
+</html>

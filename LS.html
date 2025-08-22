@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>학습현황</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo img {
+      height: 70px;
+    }
+
+    .main-body {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #117a8b;
+      color: white;
+      height: 100vh;
+      padding: 20px 15px;
+      box-sizing: border-box;
+    }
+
+    .sidebar img {
+      width: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #0f5e71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      padding: 8px 0;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #0d5060;
+      padding-left: 5px;
+    }
+
+    .main-content {
+      flex: 1;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .term-filter {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .term-filter select,
+    .term-filter button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    .table-container {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+
+    .table-container h3 {
+      margin-top: 0;
+      color: #0f4c75;
+      font-size: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: #f4f4dc;
+    }
+
+    .dashboard {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .dash-card {
+      flex: 1;
+      min-width: 200px;
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .dash-card h4 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .gauge {
+      width: 100%;
+      height: 100px;
+      background: #ddd;
+      border-radius: 100px 100px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gauge-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      background-color: #0f5e71;
+      width: 0%;
+      border-radius: 100px 100px 0 0;
+      z-index: 1;
+      transition: width 1.5s ease-out;
+    }
+
+    .gauge span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+      font-size: 18px;
+      z-index: 2;
+    }
+
+    .footer {
+      font-size: 12px;
+      text-align: center;
+      color: #888;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ 상단 헤더 -->
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="yuhanfinal.jpg" alt="유한대학교 로고" style="height: 70px;"></a>
+    </div>
+  </div>
+
+  <!-- ✅ 전체 구조 -->
+  <div class="main-body">
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="프로필 이미지">
+      <h3>강민수(21619001)</h3>
+      <button onclick="location.href='main.html'">홈</button>
+      <button onclick="location.href='index.html?login=0'">로그아웃</button>
+      <nav>
+        <a href="main.html">강의실</a>
+        <a href="calendar.html">캘린더</a>
+        <a href="portfolio.html">학습포트폴리오</a>
+        <a href="basiclearn.html">기초학습역량</a>
+        <a href="LS.html">학습현황</a>
+        <a href="curriculum.html">교과강의관리</a>
+        <a href="Gradeinquiry.html">성적조회</a>
+      </nav>
+    </aside>
+
+    <!-- 본문 -->
+    <main class="main-content">
+      <div class="section-title">학습현황</div>
+
+      <div class="term-filter">
+        * 학습현황은 학기별로 보실 수 있습니다.
+        <select>
+          <option>2024</option>
+          <option>2025</option>
+          <option>2026</option>
+        </select>
+        <select>
+          <option>1학기</option>
+          <option>2학기</option>
+        </select>
+        <button>확인</button>
+        <button style="background-color: #0f5e71; color: white;" onclick="location.href='snake.html'">현재학기</button>
+      </div>
+
+      <!-- 이수 현황 -->
+      <div class="table-container">
+        <h3>이수 현황</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>년도</th>
+              <th>학기</th>
+              <th>강의명</th>
+              <th>주차별 진도</th>
+              <th>출석률</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025</td>
+              <td>1학기</td>
+              <td>딥러닝 영상처리</td>
+              <td>15/15</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td>2025</td>
+              <td>2학기</td>
+              <td>AI 프로젝트 1</td>
+              <td>15/15</td>
+              <td>100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 학습 활동 현황 -->
+      <div class="table-container">
+        <h3>학습 활동 현황</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>년도</th>
+              <th>학기</th>
+              <th>강의명</th>
+              <th>과제</th>
+              <th>토론</th>
+              <th>팀프로젝트</th>
+              <th>시험/퀴즈</th>
+              <th>등록 콘텐츠 수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025</td>
+              <td>1</td>
+              <td>딥러닝 영상처리</td>
+              <td>7</td>
+              <td>4</td>
+              <td>2</td>
+              <td>3</td>
+              <td>31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 하단 대시보드 -->
+      <div class="dashboard">
+        <div class="dash-card">
+          <h4>과제</h4>
+          <div class="gauge" data-submitted="6" data-total="7">
+            <div class="gauge-fill"></div>
+            <span>0%</span>
+          </div>
+          전체: 7 | 제출: 6
+        </div>
+        <div class="dash-card">
+          <h4>토론</h4>
+          <div class="gauge" data-submitted="2" data-total="4">
+            <div class="gauge-fill"></div>
+            <span>0%</span>
+          </div>
+          참여수: 2 / 전체: 4
+        </div>
+        <div class="dash-card">
+          <h4>팀프로젝트</h4>
+          <div class="gauge" data-submitted="2" data-total="2">
+            <div class="gauge-fill"></div>
+            <span>0%</span>
+          </div>
+          참여수: 2 / 전체: 2
+        </div>
+        <div class="dash-card">
+          <h4>시험/퀴즈</h4>
+          <div class="gauge" data-submitted="2" data-total="3">
+            <div class="gauge-fill"></div>
+            <span>0%</span>
+          </div>
+          응시수: 2 / 전체: 3
+        </div>
+      </div>
+
+      <div class="footer">
+        [유한대학교] 14780 경기도 부천시 경인로 590 (괴안동 185-34) 대학 전화: 02-2610-0600 팩스(FAX): 02-2610-0469
+      </div>
+    </main>
+  </div>
+
+  <!-- ✅ JS: 게이지 + 숫자 애니메이션 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const gauges = document.querySelectorAll('.gauge');
+
+      gauges.forEach(gauge => {
+        const submitted = parseInt(gauge.dataset.submitted);
+        const total = parseInt(gauge.dataset.total);
+        const percentage = total > 0 ? ((submitted / total) * 100).toFixed(1) : 0;
+
+        const fill = gauge.querySelector('.gauge-fill');
+        const text = gauge.querySelector('span');
+
+        // 초기 상태
+        fill.style.width = `0%`;
+        text.textContent = `0.0%`;
+
+        // 애니메이션 적용
+        setTimeout(() => {
+          // 게이지 채우기
+          fill.style.width = `${percentage}%`;
+
+          // 숫자 점진적 증가
+          let current = 0;
+          const target = parseFloat(percentage);
+          const interval = setInterval(() => {
+            current += 1;
+            if (current >= target) {
+              current = target;
+              clearInterval(interval);
+            }
+            text.textContent = `${current.toFixed(1)}%`;
+          }, 15); // 속도 조절 가능
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>소방안전교육 학습</title>
+  <style>
+    body { margin:0; font-family:'Noto Sans KR',sans-serif; background:#333; color:#fff; }
+    .top-bar { background:#3a434a; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; font-size:15px; font-weight:700; }
+    .top-bar span:last-child { font-size:13px; font-weight:normal; }
+    .main-container { display:flex; height:calc(100vh - 60px); }
+    .video-list { width:250px; background:#e0e0e0; color:#333; padding:15px; overflow-y:auto; }
+    .video-item { background:#f8f8f8; border:1px solid #ccc; border-radius:6px; padding:10px; margin-bottom:10px; font-size:13px; cursor:pointer; transition:background .2s, border-color .2s; }
+    .video-item.active { border:2px solid #f8c51c; background:#fff7d6; }
+    .video-item .title { font-weight:700; margin-bottom:5px; }
+    .video-item .label { font-size:12px; color:#777; margin-top:5px; }
+    .video-item.done { border-color:#10b981; background:#ecfdf5; }
+    .video-item.done .label { color:#059669; font-weight:700; }
+    .video-content { flex:1; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; }
+    .video-wrapper { width:100%; max-width:1600px; margin:40px auto 0; }
+    .learning-time { position:absolute; top:10px; right:20px; font-size:14px; background:#222; padding:6px 12px; border-radius:20px; color:#fff; }
+    video { width:100%; height:800px; border:4px solid #666; border-radius:8px; background:#000; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div>25-1학기 소방안전교육 🛈</div>
+    <span>학습기간: 2025-03-12 ~ 2025-03-24</span>
+  </div>
+
+  <div class="main-container">
+    <aside class="video-list" id="videoList">
+      <!-- DB videos.id와 일치: 1001 ~ 1008 -->
+      <div class="video-item active" data-vid="1001" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo.mp4/index.m3u8">
+        <div class="title">1 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="1002" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo2.mp4/index.m3u8">
+        <div class="title">2 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="1003" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo3.mp4/index.m3u8">
+        <div class="title">3 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="1004" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo4.mp4/index.m3u8">
+        <div class="title">4 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="1005" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo5.mp4/index.m3u8">
+        <div class="title">5 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="1006" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo6.mp4/index.m3u8">
+        <div class="title">6 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="1007" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo7.mp4/index.m3u8">
+        <div class="title">7 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="1008" data-src="http://oeeggchm11489.edge.naverncp.com/hls/VC~tM883eCh535Iiw68RNA__/firevideo8.mp4/index.m3u8">
+        <div class="title">8 [동영상] 25-1학기 소방안전교육</div>
+        <div class="label">학습중</div>
+      </div>
+      <div class="video-item" data-vid="" data-src="">
+        <div class="title">9 [자료] 소방안전교육자료 (국민안전처)</div>
+        <div class="label">다운로드 완료</div>
+      </div>
+    </aside>
+
+    <section class="video-content">
+      <div class="learning-time">학습시간: <span id="time">00:00:00</span></div>
+      <div class="video-wrapper">
+        <video id="videoPlayer" controls playsinline></video>
+      </div>
+    </section>
+  </div>
+
+  <!-- HLS.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    /** ===== 설정 ===== **/
+    const API_BASE = '/api';   // 프록시 기준
+    const USER_ID  = 1;        // 🔧 로그인 사용자 ID 로 교체
+    /** ================= **/
+
+    const items    = document.querySelectorAll('.video-item');
+    const video    = document.getElementById('videoPlayer');
+    const timeSpan = document.getElementById('time');
+
+    let hls = null;
+    let saveTimer = null;
+    let currentVideoId = null;   // 화면용(1001~)
+    let lastMax = 0;             // 세션 내 최대 시청 위치
+
+    // 화면ID(1001~) -> DB ID(1~) 정규화
+    const toDBId = (vid) => (vid >= 1000 ? vid - 1000 : vid);
+
+    // 학습시간 표시
+    const pad2 = (n) => String(n).padStart(2,'0');
+    const fmt  = (sec)=>{
+      const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=Math.floor(sec%60);
+      return `${pad2(h)}:${pad2(m)}:${pad2(s)}`;
+    };
+    video.addEventListener('timeupdate', ()=>{ timeSpan.textContent = fmt(video.currentTime||0); });
+
+    // 완료 표기
+    function markCompleteUI(vid, done){
+      const card = document.querySelector(`.video-item[data-vid="${vid}"]`);
+      if(!card) return;
+      const label = card.querySelector('.label');
+      if(done){ card.classList.add('done'); if(label) label.textContent='학습완료'; }
+      else    { card.classList.remove('done'); if(label) label.textContent='학습중'; }
+    }
+
+    // --- API helpers ----------------------------------------------------------
+    async function fetchResume(userId, videoIdDB){
+      const url = `${API_BASE}/video/progress?user_id=${userId}&video_id=${videoIdDB}`;
+      const r = await fetch(url);
+      if(!r.ok) return 0;
+      const d = await r.json();
+      return Number(d.last_pos_sec)||0; // 서버가 반환하는 키명(last_pos_sec)에 맞춤
+    }
+
+    // 진행 저장 (UPSERT)
+    async function saveProgress(final=false){
+      if(!currentVideoId || !video.duration) return;
+      const videoIdDB = toDBId(currentVideoId);
+      const pos   = Number(video.currentTime||0);
+      lastMax     = Math.max(lastMax, pos);
+
+      const body = {
+        user_id: USER_ID,
+        video_id: videoIdDB,                 // DB ID로 저장
+
+        // ✅ 서버 스키마(정식)
+        last_position_sec: Math.floor(pos),
+        max_position_sec:  Math.floor(lastMax),
+        watched_seconds:   Math.floor(pos),
+        duration_sec:      Math.floor(video.duration||0),
+        completed:         (final || video.ended) ? 1 : 0,
+
+        // 🧩 혹시 서버가 구 키도 허용하면 대비(무시되도 무방)
+        position:      pos,
+        max_position:  lastMax,
+        duration:      Math.floor(video.duration||0),
+      };
+
+      const json = JSON.stringify(body);
+
+      // 종료 직전엔 beacon으로 비동기 전송(헤더는 못붙지만 서버는 body만 있으면 처리됨)
+      if(final && navigator.sendBeacon){
+        navigator.sendBeacon(`${API_BASE}/video/progress`, new Blob([json], {type:'application/json'}));
+        return;
+      }
+
+      await fetch(`${API_BASE}/video/progress`, {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'X-User-Id': String(USER_ID) // 서버에서 쓰면 활용, 아니면 무시
+        },
+        body: json
+      }).catch(()=>{});
+    }
+
+    // 비디오 메타 업서트(실제 길이/URL/제목을 videos 테이블에 반영 — 서버에 엔드포인트 없으면 자동 무시)
+    async function sendVideoMeta(videoIdDB, title, url, durationSec){
+      const body = { video_id: videoIdDB, title, url, duration_sec: Math.floor(durationSec||0) };
+      await fetch(`${API_BASE}/video/meta`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+      }).catch(()=>{}); // 엔드포인트 없으면 404 -> 무시
+    }
+    // --------------------------------------------------------------------------
+
+    function startSaving(){ if(!saveTimer){ saveTimer = setInterval(()=>saveProgress(false), 10000); } }
+    function stopSaving(){ if(saveTimer){ clearInterval(saveTimer); saveTimer=null; saveProgress(false); } }
+
+    // 안전한 이어보기 적용
+    function applyResumeOnce(target){
+      if(!isFinite(target) || target < 1) return;
+      let applied=false;
+      const trySeek=()=>{ if(!applied){ try{ video.currentTime = target; applied=true; }catch{} } };
+      const onMeta = ()=>{ trySeek(); video.removeEventListener('loadedmetadata', onMeta); };
+      const onPlay = ()=>{ trySeek(); video.removeEventListener('playing', onPlay); };
+      trySeek();
+      video.addEventListener('loadedmetadata', onMeta, {once:true});
+      video.addEventListener('playing', onPlay, {once:true});
+      setTimeout(trySeek, 1500);
+    }
+
+    // 비디오 로드 + 이어보기 + 메타 기록
+    async function loadVideoFromItem(item){
+      const src = item.getAttribute('data-src');
+      const vid = Number(item.getAttribute('data-vid'));   // 화면 ID(1001~)
+      if(!src || !vid) return;
+
+      stopSaving();
+      if(hls){ hls.destroy(); hls=null; }
+      video.pause(); video.removeAttribute('src'); video.load();
+      document.querySelector('.video-item.active')?.classList.remove('active');
+      item.classList.add('active');
+
+      currentVideoId = vid;
+      lastMax = 0;
+      markCompleteUI(vid, false);
+
+      // 이어보기 위치 조회 (DB ID로)
+      const videoIdDB = toDBId(vid);
+      let resumeAt = 0;
+      try{ resumeAt = await fetchResume(USER_ID, videoIdDB); }catch{}
+
+      // HLS 로드
+      const onLoadedMeta = async ()=>{
+        video.removeEventListener('loadedmetadata', onLoadedMeta);
+        const dur = isFinite(video.duration) ? video.duration : 0;
+
+        // 실제 길이/URL/제목을 videos에 업서트(엔드포인트 없으면 무시)
+        const title = (item.querySelector('.title')?.textContent || '').trim();
+        await sendVideoMeta(videoIdDB, title, src, dur);
+
+        // 안전한 이어보기
+        const safe = Math.min(resumeAt||0, Math.max(0, dur-1));
+        if(safe > 1) applyResumeOnce(safe);
+
+        video.play().catch(()=>{});
+      };
+
+      if(Hls.isSupported()){
+        hls = new Hls({ startPosition: (resumeAt>1 ? resumeAt : -1) });
+        hls.loadSource(src);
+        hls.attachMedia(video);
+        video.addEventListener('loadedmetadata', onLoadedMeta);
+      } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+        video.src = src;
+        video.addEventListener('loadedmetadata', onLoadedMeta);
+      }
+
+      video.onplay  = startSaving;
+      video.onpause = stopSaving;
+      video.onended = async ()=>{ await saveProgress(true); stopSaving(); markCompleteUI(vid, true); };
+    }
+
+    // 이탈/탭 변경 처리
+    window.addEventListener('beforeunload', ()=>{ saveProgress(true); });
+    document.addEventListener('visibilitychange', ()=>{ document.hidden ? stopSaving() : startSaving(); });
+
+    // 리스트 클릭 시 영상 교체
+    document.querySelectorAll('.video-item').forEach(it => it.addEventListener('click', ()=>loadVideoFromItem(it)));
+
+    // 최초 로드
+    window.addEventListener('load', ()=>{
+      const first = document.querySelector('.video-item.active');
+      if(first) loadVideoFromItem(first);
+    });
+  </script>
+</body>
+</html>
